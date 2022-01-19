@@ -1,0 +1,88 @@
+﻿<Window x:Class="HomeworkMVVM.Veiws.Shell"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HomeworkMVVM.Veiws"
+        mc:Ignorable="d"
+        Title="Калькулятор" Height="350" Width="220"
+        xmlns:prism="http://prismlibrary.com/" xmlns:veiwmodels="clr-namespace:HomeworkMVVM.VeiwModels" d:DataContext="{d:DesignInstance Type=veiwmodels:ShellViewModel}"
+        prism:ViewModelLocator.AutoWireViewModel="True">
+    <Window.DataContext>
+        <veiwmodels:ShellViewModel/>
+    </Window.DataContext>
+    <Window.Background>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="Black"/>
+            <GradientStop Color="White" Offset="1"/>
+        </LinearGradientBrush>
+    </Window.Background>
+    <Window.Resources>
+        <Style TargetType="Button" >
+            <Setter Property="Command" Value="{Binding Path=ClickCommand}"/>
+            <Setter Property="CommandParameter" Value="{Binding Path=Content,RelativeSource={RelativeSource Self}}"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Width" Value="40"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="Background" Value="Aqua"/>
+            <Setter Property="BorderThickness" Value="3"/>
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="BorderBrush"  Value="Gray" />
+            <Setter Property="Width" Value="190"/>
+            <Setter Property="BorderThickness" Value="3"/>
+        </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+    </Window.Resources>
+    <Grid >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Text="{Binding Path = Result}" />
+        <TextBox Text="{Binding Path=Expression}"  Grid.Row="1"/>
+        <Grid Grid.Row="2">    
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Button Content="1" Grid.Column="0" Grid.Row="0"/>
+            <Button Content="2" Grid.Column="1" Grid.Row="0"/>
+            <Button Content="3" Grid.Column="2" Grid.Row="0"/>
+            <Button Content="4" Grid.Column="3" Grid.Row="0"/>
+
+            <Button Content="5" Grid.Column="0" Grid.Row="1"/>
+            <Button Content="6" Grid.Column="1" Grid.Row="1"/>
+            <Button Content="7" Grid.Column="2" Grid.Row="1"/>
+            <Button Content="8" Grid.Column="3" Grid.Row="1"/>
+
+            <Button Content="9" Grid.Column="0" Grid.Row="2"/>
+            <Button Content="0" Grid.Column="1" Grid.Row="2"/>
+            <Button Content="." Grid.Column="2" Grid.Row="2"/>
+            <Button Content="+" Grid.Column="3" Grid.Row="2"/>
+
+            <Button Content="-" Grid.Column="0" Grid.Row="3"/>
+            <Button Content="*" Grid.Column="1" Grid.Row="3"/>
+            <Button Content="/" Grid.Column="2" Grid.Row="3"/>
+            <Button Content="=" Grid.Column="3" Grid.Row="3" Background="Yellow" Command="{Binding Path=CalculateCommand}"/>
+        </Grid>
+    </Grid>
+</Window>
